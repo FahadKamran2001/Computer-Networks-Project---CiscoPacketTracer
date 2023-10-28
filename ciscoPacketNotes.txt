@@ -1,0 +1,60 @@
+Router -> 2811
+Switch -> 2960 - 24TT
+wires:
+	1) Serial DTE -> 2 routers
+	2) Copper Crossover -> like devices (same layer)
+			    -> router ->laptop/PC
+	3) Copper Straight-Through -> different layer
+- router is layer 3
+- switch is layer 2
+- switch can have as many links
+- To connect router to layer we use copper straight through denoted by continuous link
+- router to laptop/PC we use straight-through denoted drawing like -----
+- router for 2 interface needs WIC-1ENET interface card which allows 1 more
+interface so the router can handle 1+1=2 interfaces
+-router to router we use card WIC-2T
+
+192.16.1.0/24
+- the 192 is the number in a class
+- /24 means 24 bits are representing the network and remaining represent the host
+- A class range = 0-127
+- B class range = 128-191
+- C class range = 192-223
+- further classes are reserved
+- we will use class C IP (starting from 192 ending at 223)
+- each connection with a router has unique network
+- to change networks for router, change one of the 3 network eg change 192.16.1.0 to 192.16.2.0 or 192.17.1.0 or 193.16.1.0
+- in host ip (the last point(.), we cant give 0 since it belongs to the network and cant give 255 since it belongs to the broadcast IP
+- we give one more fix ip to gateway eg network is 192.16.1.0 and gateway is 192.16.1.1
+
+FOR GIVING NETWORK TO GATEWAY ON ROUTER eg when network of router is 192.168.1.0
+- interface fa 0/0 
+- ip address (then write gateway network, gateway is the first 3 parts of ip of router = 192.168.1) 192.168.1.1 255.255.255.0(this is the subnet mask(SM))
+
+
+for ip router over serial
+-we route to every end network on the other side of the serial cable along with the wire id 
+eg> ip route 192.168.4.0 255.255.255.0 se0/3/0
+
+for class A
+eg ip 11.1.1.1
+network address is 11.0.0.0 subnet mask 255.0.0.0
+broadcast address is 11.255.255.255
+
+for class B
+eg 131.1.1.1 subnet mask 255.255.0.0
+network address is 131.1.0.0
+broadcast address is 11.1.255.255
+
+vlsm(variable length subnet mask)(it is classless)
+
+
+
+
+
+
+
+
+
+
+	

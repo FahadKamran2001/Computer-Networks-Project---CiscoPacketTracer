@@ -1,0 +1,92 @@
+Click on router -> CLI -> no -> enter -> enter
+
+enable
+configure terminal
+interface fa 0/0
+ip address 192.168.1.1 (unused ip) 255.255.255.0
+no shutdown
+exit
+interface eth 0/3/0
+ip address 192.168.2.1 255.255.255.0
+no shutdown
+exit
+interface se 0/1/0
+ip address 192.168.3.1 255.255.255.0
+no shutdown
+exit
+
+
+
+
+afterward close router terminal and click on the PC connected with the gate way
+go to desktop ( do same for 2nd interface with their own gateway , do nothing for switch)
+click on ip configuration
+enter any ip with host .2 to .254 any (unused)
+enter the default gate way it connects to the PC (here is 192.168.1.1)
+
+for dynamic routing
+click on router
+
+show ip route
+enable
+configure terminal
+router rip
+version 2
+network (ip of network)(do for all networks after C upto before the subnet mask, eg 1.0.0.0
+no auto-summary
+
+
+-for eigrp routing
+Eigrp: (Enhanced Interior Gateway Routing Protocol)
+
+enable
+show ip route
+configure terminal 
+router eigrp AS_number (Autonomous System number - this can be any number of range 1 to 65535; same for all the router)
+network NA
+no auto-summary
+
+Note: If two routers belong to different AS_, they will not share routing information.
+
+
+
+
+-for ospf routing
+OSPF: (Open Shortest Path First)  
+
+enable
+show ip route
+configure terminal 
+router ospf PROCESS_ID
+network Network_address  WILDCARD_MASK  AREA 10
+
+Note: Note that the OSPF process ID doesn’t have to be the same on all routers in order for the routers 
+to establish a neighbor relationship, but the area parameter has to be the same on all neighboring routers 
+in order for the routers to become neighbors.
+
+-for vlsm(variable length subnet mask)
+on router
+
+enable
+configure terminal
+interface fa0/0
+ip address (the ip addressw with subnet mask)
+ip helper-address (only ip of server)
+no shutdown
+
+natting
+
+put device ip to static and use the private ip
+
+enable
+config terminal
+interface (interface of private ip device)
+ip nat inside
+exit
+interface se0/3/1
+ip nat outside
+exit
+ip nat inside source static 172.17.217.2(private ip of device) 76.8.178.72(gateway of se0/3/1)
+
+
+
